@@ -18,7 +18,6 @@ namespace DoublyLinkedListWithErrors
         */
         public void addToTail(DLLNode p)
         {
-
             if (head == null)
             {
                 head = p;
@@ -50,6 +49,12 @@ namespace DoublyLinkedListWithErrors
         public void removHead()
         {
             if (this.head == null) return;
+            if (this.head.next == null)
+            {
+                this.head = null;
+                this.tail = null;
+                return;
+            }
             this.head = this.head.next;
             this.head.previous = null;
         } // removeHead
@@ -67,21 +72,21 @@ namespace DoublyLinkedListWithErrors
 
         /*-------------------------------------------------
          * Return null if the string does not exist.
-         * ----------------------------------------------*/
+         * -----------------------------------------------*/
         public DLLNode search(int num)
         {
             DLLNode p = head;
             while (p != null)
             {
-                p = p.next;
                 if (p.num == num) break;
+                p = p.next;
             }
             return (p);
         } // end of search (return pionter to the node);
 
         public void removeNode(DLLNode p)
         { // removing the node p.
-
+            if (p == null) return;
             if (p.next == null)
             {
                 this.tail = this.tail.previous;
@@ -110,7 +115,7 @@ namespace DoublyLinkedListWithErrors
             while (p != null)
             {
                 tot += p.num;
-                p = p.next.next;
+                p = p.next;
             }
             return (tot);
         } // end of total
